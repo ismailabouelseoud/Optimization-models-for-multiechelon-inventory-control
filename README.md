@@ -8,7 +8,7 @@ by Joern Meissner and Olga V. Senicheva. It reproduces the paper’s results acr
 ## Usage
 
 ```bash
-python simulate.py --testcase_id {0,1,2,3,4}
+python3 simulate.py --testcase_id {0,1,2,3,4}
 ````
 
 ### Options
