@@ -50,7 +50,7 @@ All policies live in the `policies/` folder:
    Lookahead (LA) policy for multi‑location transshipment.
 
 5. **`lpp.py`**
-   Real‑time optimal transshipment policy (upper bound for multi‑location).
+   Real‑time optimal transshipment policy (upper bound for multi‑location considered optimal for multi‑location).
 
 6. **`ntp.py`**
    No‑Transshipment Policy: holds all inventory in its original location.
