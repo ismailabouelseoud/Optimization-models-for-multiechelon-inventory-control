@@ -190,7 +190,7 @@ def dict_until_key(d, stop_key):
 if __name__ == "__main__":
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="Simulate inventory management policies.")
-    parser.add_argument('--testcase_id', type=int, default=2, help='Test case ID to run (0-4), mulitlocation 0 and 1, two location: 2,3, and 4')
+    parser.add_argument('--testcase_id', type=int, default=2, help='Test case ID to run (0-4), mulitlocation 0 and 1, two location: 2,3,and 4')
     parser.add_argument('--N', type=int, default=1000, help='Number of simulation iterations (default: 1000)')
     parser.add_argument('--force', action='store_true', help='Force re-run of all simulations even if results exist')
     args = parser.parse_args()

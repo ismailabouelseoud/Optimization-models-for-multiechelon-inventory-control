@@ -68,9 +68,13 @@ class DPGenPolicy(Policy):
         pass
 
     def _compute_dp_gen(self):
-        
+        """
+        Compute DP tables for L-location problem by enumerating all feasible
+        transshipment splits.
+        """
+        # Helper: generate all k-tuples of non-negative ints summing to n
         def all_splits(n, k):
-            # Generate all k-tuples of non-negative integers summing to n (stars and bars, non-recursive)
+            # Uses stars-and-bars via combinations of divider positions
             for dividers in itertools.combinations(range(n + k - 1), k - 1):
                 result = []
                 last = 0
@@ -79,47 +83,75 @@ class DPGenPolicy(Policy):
                     last = divider + 1
                 result.append(n + k - 1 - last)
                 yield tuple(result)
-        max_inv = sum(self.S)
+
+        max_inv = sum(self.S)  # Maximum total inventory across all locations
+
+        # Backward induction over periods
         for t in reversed(range(self.T)):
-            x_max = [range(self.S[i] + 1) for i in range(self.L)]  # All possible inventory levels for each location
-            for x in itertools.product(*x_max):  # Iterate over all combinations of possible inventory levels
-                best_val = -1e9
+            # All possible inventory levels per location
+            x_ranges = [range(self.S[i] + 1) for i in range(self.L)]
+            # Iterate every joint state x = (x1, x2, ..., xL)
+            for x in itertools.product(*x_ranges):
+                best_val = -np.inf
                 best_z = None
-                # Enumerate all feasible transhipements (z_ijt)
+
+                # Precompute possible z-rows for each origin location
+                # z_rows[i] lists all ways to split x[i] units to L destinations
                 all_z_rows = [list(all_splits(x[i], self.L)) for i in range(self.L)]
 
+                # Enumerate every transshipment matrix z via Cartesian product
                 for z_tuple in itertools.product(*all_z_rows):
+                    # Convert tuple rows to matrix form
                     z = [list(row) for row in z_tuple]
 
+                    # Compute post-transshipment inventory y for each location
                     y = []
                     for i in range(self.L):
-                        # total coming into i
-                        inflow  = sum(z[j][i] for j in range(self.L))
-                        # total leaving  i
+                        inflow = sum(z[j][i] for j in range(self.L))
                         outflow = sum(z[i][j] for j in range(self.L))
-                        # start from x[i], add net flow
                         y.append(x[i] + inflow - outflow)
 
-                    cost = sum(self.c * self.rho[i][j] * z[i][j] for i in range(self.L) for j in range(self.L))    
+                    # Total transshipment cost across all origin-destination pairs
+                    cost = sum(
+                        self.c * self.rho[i][j] * z[i][j]
+                        for i in range(self.L)
+                        for j in range(self.L)
+                    )
 
-                    ev = 0.0 
-                    for d, prob in self.demand_pmf.items(): # For each possible demand scenario
+                    # Expected value accumulator
+                    ev = 0.0
+                    # Loop over demand scenarios in PMF
+                    for d, prob in self.demand_pmf.items():
                         reward = 0
                         x_post = [0] * self.L
+                        # Calculate reward and next inventory for each location
                         for i in range(self.L):
-                            reward += self.p[i] * min(y[i],d[i]) - self.h[i]*max(y[i] - d[i], 0)
+                            # Sales revenue minus holding cost
+                            reward += (
+                                self.p[i] * min(y[i], d[i])
+                                - self.h[i] * max(y[i] - d[i], 0)
+                            )
+                            # Inventory carried to next period (capped)
                             x_post[i] = min(max(y[i] - d[i], 0), max_inv)
 
                         ev += prob * (reward + self.V[t + 1][x_post[0]][x_post[1]])
+
+                    # Net value after subtracting shipping cost
                     val = ev - cost
+
+                    # Update best decision if improved
                     if val > best_val:
                         best_val = val
                         best_z = z
 
+                # Store computed value and optimal action
                 self.V[t][x[0]][x[1]] = best_val
                 self.best_action[t][x[0]][x[1]] = best_z
 
     def __call__(self, x, t, d):
-
+        """
+        Retrieve the precomputed optimal transshipment plan for state x at period t.
+        Returns an LxL matrix z of shipment quantities.
+        """
         z = self.best_action[t][x[0]][x[1]]
         return z
