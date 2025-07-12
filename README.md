@@ -108,7 +108,7 @@ In this example, under uniform distribution (`'Uniform'`), two locations (`L = 2
   Initial stock levels at each location.
 
 * **`ij = [1, 1]`**
-  uniform distribution [0,i] and [0,j] in this case [0,1] and [0,1] every set under test id 4 will loop over i=[1,2,3] and j=[1,2,3] yielding 18 set (from 0 to 17)
+   We draw uniformly from [0, i] and [0, j]; in this example both intervals are [0, 1]. Under test case 4, i and j each range over [1, 2, 3], yielding 18 total parameter sets (indexed 0 through 17 all two location set has 18 sets). 
 
 With these settings, both the exact dynamic program (OPT) and its generalization (DPGen) produce an **average profit of 95.88** (their ratio is **1.0**, indicating perfect agreement) in **0.237 s** of computation time. This confirms that our generalized DP code replicates the optimal two‐location solution from `dp.py` while remaining extensible to larger, multi‐location problems.
 
