@@ -1,4 +1,6 @@
 ````markdown
+### Thesis: Ismail Abouelseoud, Thesis topic: Optimization Models for Multiechelon Inventory Control
+
 # ADP Lateral Shipments
 
 This code implements the algorithm described in the paper  
@@ -10,7 +12,6 @@ by Joern Meissner and Olga V. Senicheva. It reproduces the paper’s results acr
 ```bash
 python simulate.py --testcase_id {0,1,2,3,4}
 ````
-
 ### Options
 
 1. `--N <int>`
