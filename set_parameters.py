@@ -4,6 +4,20 @@ from scipy.stats import nbinom
 import random
 
 def uniform_demand_pmf(range_d1, range_d2):
+
+    """
+    Builds the joint PMF of two independent discrete uniform demands.
+
+    Args:
+        range_d1 (int): Maximum demand for product_1; demand is uniform over {0,…,range_d1}.
+        range_d2 (int): Maximum demand for product_2; demand is uniform over {0,…,range_d2}.
+
+    Returns:
+        dict[tuple[int,int], float]:
+            Keys are (d1, d2) pairs; values are P(D1=d1 and D2=d2), with each marginal
+            P(Di = k) = 1/(range_di + 1).
+    """
+
     pmf = {}
     num_d1 = range_d1+1
     num_d2 = range_d2+1
@@ -120,8 +134,6 @@ def generate_distance_matrix(n_locations, seed=None):
     Returns:
         np.ndarray: A symmetric distance matrix of shape (n_locations, n_locations).
     """
-
-    
     if seed is not None:
         np.random.seed(seed)
     coords = np.random.uniform(0, 100, size=(n_locations, 2))
@@ -232,10 +244,16 @@ def generate_set3(ri, rhos, pin, T, max_d):
         for r in range(len(ri)):
             i = ri[k]
             j = ri[r]
+
+            #calcualte mu and sigma for negative binomial
             mu1, sigma1 =  i * (1 - pin) / pin, i * (1 - pin) / (pin*pin)    
             mu2, sigma2 = j * (1 - pin) / pin, j * (1 - pin) / (pin*pin)
-            S1 = int(np.floor(mu1 * T + sigma1 * np.sqrt(T)))  # =3  :contentReference[oaicite:4]{index=4}
-            S2 = int(np.floor(mu2 * T + sigma2 * np.sqrt(T)))  # =3  :contentReference[oaicite:4]{index=4}
+    
+            #inventory up to a level eq 16 paper :
+            # "Approximate dynamic programming for lateral transshipment problems in multi-location inventory systems. Joern Meissner and Olga V. Senicheva"
+
+            S1 = int(np.floor(mu1 * T + sigma1 * np.sqrt(T)))  
+            S2 = int(np.floor(mu2 * T + sigma2 * np.sqrt(T))) 
 
             # Vertically stack the rows to form the 2x4 array
 
@@ -276,11 +294,14 @@ def generate_set4(poisson_lis, rhos, T, max_d):
 
             i = poisson_lis[k]
             j = poisson_lis[r]
-            
+
+            #calcualte mu and sigma for Pisson distribution
             mu1, sigma1 = i, np.sqrt(i)    
             mu2, sigma2 = j, np.sqrt(j)
 
-            S1 = int(np.floor(mu1*T + sigma1*np.sqrt(T)))  # =3  :contentReference[oaicite:4]{index=4}
+            #inventory up to a level eq 16 paper :
+            # "Approximate dynamic programming for lateral transshipment problems in multi-location inventory systems. Joern Meissner and Olga V. Senicheva"
+            S1 = int(np.floor(mu1*T + sigma1*np.sqrt(T))) 
             S2 = int(np.floor(mu2*T + sigma2*np.sqrt(T))) 
 
 
@@ -307,7 +328,7 @@ def generate_set4(poisson_lis, rhos, T, max_d):
 
 def generate_set5(uniform_lis, rhos, T):
     """
-    Generate parameters for the fourth experimental set with two locations and Poisson demand.
+    Generate parameters for the fourth experimental set with two locations and unifrom demand.
     Args:
         uniform_lis (list): List of uniform values [0,b].
         rhos (list): List of distances between locations.
@@ -322,12 +343,16 @@ def generate_set5(uniform_lis, rhos, T):
 
             i = uniform_lis[k]
             j = uniform_lis[r]
+            
+            #calcualte mu and sigma for uniform distribution
             mu1, sigma1 = i/2, np.sqrt((i-0)/np.sqrt(12))    
             mu2, sigma2 = j/2, np.sqrt((j-0)/np.sqrt(12))
+           
+            #inventory up to a level eq 16 paper :
+            # "Approximate dynamic programming for lateral transshipment problems in multi-location inventory systems. Joern Meissner and Olga V. Senicheva"
 
-            #mu, sigma = 1.0, np.sqrt(2/3)  
-            S1 = int(np.floor(mu1*T + sigma1*np.sqrt(T)))  # =3  :contentReference[oaicite:4]{index=4}
-            S2 = int(np.floor(mu2*T + sigma2*np.sqrt(T)))  # =3  :contentReference[oaicite:4]{index=4}         
+            S1 = int(np.floor(mu1*T + sigma1*np.sqrt(T)))  
+            S2 = int(np.floor(mu2*T + sigma2*np.sqrt(T)))         
 
 
             # Vertically stack the rows to form the 2x4 array
@@ -394,13 +419,13 @@ def generate_parameters():
 
     poisson_lis = [0.5, 1, 1.5] # Poisson rates
     max_d = [8, 9, 10] # Poisson maximum demand realizations
-    unif_lis=[1,2,3]
+    unif_lis=[1,2,3] #unifrom [0,b_i]
     
     # Generate parameters for the two locations with poisson demand
-
     set_params = generate_set4(poisson_lis, rhos, T, max_d)  
     params_list.append(set_params)
     
+    # Generate parameters for the two locations with uniform demand
     set_params = generate_set5(unif_lis, rhos, T)  
     params_list.append(set_params)
 
@@ -413,7 +438,7 @@ if __name__ == "__main__":
     print("Generated parameters for all sets:")
 
     # Example usage:
-    n = 4
+    n = 5
     for p_id in range(len(params_list)):
         print(f"Set {p_id + 1}: (first {n} entries)")
         for p in params_list[p_id][:n]:
