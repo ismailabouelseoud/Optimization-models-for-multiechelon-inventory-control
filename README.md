@@ -13,7 +13,7 @@ It reproduces the paper’s results across five experimental setups: three for t
 ## Usage
 
 ```bash
-python simulate.py --testcase_id {0,1,2,3,4}
+python3 simulate.py --testcase_id {0,1,2,3,4}
 ````
 
 ### Options

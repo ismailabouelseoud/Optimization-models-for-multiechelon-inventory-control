@@ -1,0 +1,24 @@
+Iter 15/18. Initiating DPGen policy start.
+Set 15/18. Initiating DPGen policy end. Elaplsed time 5.361152172088623 sec.
+Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [9, 6], 'ij': [6, 4]} 
+Iter 15/18. Initiating ADP policy start.
+Set 15/18. Initiating ADP policy end. Elaplsed time 55.399908781051636 sec.
+Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [9, 6], 'ij': [6, 4]} 
+Iter 15/18. Initiating TIE policy start.
+Set 15/18. Initiating TIE policy end. Elaplsed time 1.8835067749023438e-05 sec.
+Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [9, 6], 'ij': [6, 4]} 
+Iter 15/18. Initiating LA policy start.
+Set 15/18. Initiating LA policy end. Elaplsed time 3.504753112792969e-05 sec.
+Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [9, 6], 'ij': [6, 4]} 
+Iter 15/18. Initiating NT policy start.
+Set 15/18. Initiating NT policy end. Elaplsed time 1.0967254638671875e-05 sec.
+Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [9, 6], 'ij': [6, 4]} 
+Iter 15/18. Initiating RCP policy start.
+Set 15/18. Initiating RCP policy end. Elaplsed time 8.821487426757812e-06 sec.
+Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [9, 6], 'ij': [6, 4]} 
+Set 15/18, 1000 iterations. Average profit <OPT>: 175.76, average profit <DPGen>: 175.76. Ratio: 1.0. Elapsed time 43.254984855651855 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 175.76, average profit <ADP>: 173.06. Ratio: 0.9846155596772909. Elapsed time 95.28586387634277 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 175.10, average profit <TIE>: 162.36. Ratio: 0.9272265212301191. Elapsed time 42.859500885009766 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 175.52, average profit <LA>: 172.87. Ratio: 0.9849074448628907. Elapsed time 43.27413868904114 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 175.82, average profit <NT>: 175.10. Ratio: 0.9959049027414402. Elapsed time 43.20383381843567 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 175.76, average profit <RCP>: 171.91. Ratio: 0.9781067580022985. Elapsed time 46.47882795333862 sec.

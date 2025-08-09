@@ -1,0 +1,24 @@
+Iter 2/18. Initiating DPGen policy start.
+Set 2/18. Initiating DPGen policy end. Elaplsed time 0.49242281913757324 sec.
+Finished Running Set 2 from test id 3 with params: {'Distrbution': 'Poission', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.5, 1], 'rho': [[0, 29], [29, 0]], 'S': [3, 6], 'ij': [0.5, 1]} 
+Iter 2/18. Initiating ADP policy start.
+Set 2/18. Initiating ADP policy end. Elaplsed time 76.19597005844116 sec.
+Finished Running Set 2 from test id 3 with params: {'Distrbution': 'Poission', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.5, 1], 'rho': [[0, 29], [29, 0]], 'S': [3, 6], 'ij': [0.5, 1]} 
+Iter 2/18. Initiating TIE policy start.
+Set 2/18. Initiating TIE policy end. Elaplsed time 5.698204040527344e-05 sec.
+Finished Running Set 2 from test id 3 with params: {'Distrbution': 'Poission', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.5, 1], 'rho': [[0, 29], [29, 0]], 'S': [3, 6], 'ij': [0.5, 1]} 
+Iter 2/18. Initiating LA policy start.
+Set 2/18. Initiating LA policy end. Elaplsed time 7.295608520507812e-05 sec.
+Finished Running Set 2 from test id 3 with params: {'Distrbution': 'Poission', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.5, 1], 'rho': [[0, 29], [29, 0]], 'S': [3, 6], 'ij': [0.5, 1]} 
+Iter 2/18. Initiating NT policy start.
+Set 2/18. Initiating NT policy end. Elaplsed time 1.52587890625e-05 sec.
+Finished Running Set 2 from test id 3 with params: {'Distrbution': 'Poission', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.5, 1], 'rho': [[0, 29], [29, 0]], 'S': [3, 6], 'ij': [0.5, 1]} 
+Iter 2/18. Initiating RCP policy start.
+Set 2/18. Initiating RCP policy end. Elaplsed time 1.3828277587890625e-05 sec.
+Finished Running Set 2 from test id 3 with params: {'Distrbution': 'Poission', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.5, 1], 'rho': [[0, 29], [29, 0]], 'S': [3, 6], 'ij': [0.5, 1]} 
+Set 2/18, 1000 iterations. Average profit <OPT>: 148.94, average profit <DPGen>: 148.94. Ratio: 1.0. Elapsed time 3.741935968399048 sec.
+Set 2/18, 1000 iterations. Average profit <OPT>: 148.42, average profit <ADP>: 146.97. Ratio: 0.990243770971176. Elapsed time 77.08901286125183 sec.
+Set 2/18, 1000 iterations. Average profit <OPT>: 147.39, average profit <TIE>: 149.15. Ratio: 1.0119003195581822. Elapsed time 4.0225372314453125 sec.
+Set 2/18, 1000 iterations. Average profit <OPT>: 148.74, average profit <LA>: 148.44. Ratio: 0.9980099101097911. Elapsed time 4.127822160720825 sec.
+Set 2/18, 1000 iterations. Average profit <OPT>: 148.34, average profit <NT>: 146.68. Ratio: 0.9887761636725202. Elapsed time 3.5962162017822266 sec.
+Set 2/18, 1000 iterations. Average profit <OPT>: 148.33, average profit <RCP>: 145.51. Ratio: 0.981028403459923. Elapsed time 3.6644809246063232 sec.
