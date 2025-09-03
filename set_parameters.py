@@ -174,6 +174,8 @@ def gererate_set1(locations, base_p, base_h, mu_daily, T, demand_realizations):
                 'p': p,
                 'mu': [mu_daily] * L,
                 'c': c,
+                'tc_u':[0,2,10],
+                'tc_m':[1,0.5,0.25],
                 'rho': rho.copy(),
                 'S': S.copy(),
                 'demand_sampler': sampler,
@@ -218,7 +220,9 @@ def gererate_set2(locations, base_p, base_h, mu_daily, T, demand_realizations):
                 'h': h,
                 'p': p,
                 'mu': [mu_daily]*L,
-                'c': 0.5,
+                'c': 1,
+                'tc_u': [0,5,20,30,40],
+                'tc_m':[1, 0.5, 0.25, 0.2, 0.1],
                 'rho': rho.copy(),
                 'S': config['S'].copy(),
                 'demand_sampler': sampler,
@@ -229,122 +233,155 @@ def gererate_set2(locations, base_p, base_h, mu_daily, T, demand_realizations):
 
 def generate_set3(ri, rhos, pin, T, max_d):
     """
-    Generate parameters for the third experimental set with two locations and negative binomial demand.
+    Generate parameters for the third experimental set with two locations 
+    and negative binomial demand. This version creates all combinations of 'h' and 'p'.
+    
     Args:
         ri (list): List of realizations for the negative binomial distribution.
         rhos (list): List of distances between locations.
         pin (float): Probability of success in the negative binomial distribution.
         T (int): Number of time periods.
         max_d (list): Maximum demand realizations for the negative binomial distribution.
+        
     Returns:
         list: List of parameter dictionaries for each configuration.
     """
     set_params = []
+    # Define h and p values outside the loop for clarity
+    h_values_1 = [8]
+    p_values_1 = [40]
+    h_values_2 = [12]
+    p_values_2 = [80]
+
     for k in range(len(ri)):
         for r in range(len(ri)):
             i = ri[k]
             j = ri[r]
 
-            #calcualte mu and sigma for negative binomial
-            mu1, sigma1 =  i * (1 - pin) / pin, i * (1 - pin) / (pin*pin)    
-            mu2, sigma2 = j * (1 - pin) / pin, j * (1 - pin) / (pin*pin)
+            # Calculate mean, variance, and then standard deviation (sqrt of variance)
+            mu1 = i * (1 - pin) / pin
+            variance1 = i * (1 - pin) / (pin**2)
+            sigma1 = np.sqrt(variance1)
+            
+            mu2 = j * (1 - pin) / pin
+            variance2 = j * (1 - pin) / (pin**2)
+            sigma2 = np.sqrt(variance2)
     
-            #inventory up to a level eq 16 paper :
-            # "Approximate dynamic programming for lateral transshipment problems in multi-location inventory systems. Joern Meissner and Olga V. Senicheva"
-
+            # Inventory up to a level
             S1 = int(np.floor(mu1 * T + sigma1 * np.sqrt(T)))  
             S2 = int(np.floor(mu2 * T + sigma2 * np.sqrt(T))) 
 
-            # Vertically stack the rows to form the 2x4 array
-
             for rho in rhos:
-                params = {
-                    'Distrbution':'NegBin',
-                    'L'   : 2,
-                    'T'   : T,
-                    'h'   : [8, 12],
-                    'c'   : 1,
-                    'p'   : [40, 80],
-                    'mu'  : [mu1, mu2],
-                    'rho' : [[0, int(rho)], [int(rho), 0]],
-                    'S'   : [S1, S2],
-                    "ij": [i, j],
-                    'demand_sampler': make_negbinomial_demand_sampler(i, pin, j, pin),
-                    'full_demand_matrix': negbinomial_demand_pmf(max_d[r], max_d[k], i, pin, j, pin),
-                    'expected_demand_matrix': np.vstack((np.full(T, mu1, dtype=float), np.full(T, mu2, dtype=float)))
-                }
-                set_params.append(params)
+                # --- Loop through each h and p value to create all combinations ---
+                for h_val in h_values_1:
+                    for h_val_1 in h_values_2:
+                        for p_val in p_values_1:
+                            for p_val_1 in p_values_2:
+                                params = {
+                                    'Distrbution': 'NegBin',
+                                    'L'   : 2,
+                                    'T'   : T,
+                                    'h'   : [h_val,h_val_1],  # Assign the individual h value
+                                    'c'   : 1,
+                                    'tc_u': [0, 2, 4, 8],
+                                    'tc_m': [0.5, 0.3, 0.2, 0.1],
+                                    'p'   : [p_val,p_val_1],  # Assign the individual p value
+                                    'mu'  : [mu1, mu2],
+                                    'rho' : [[0, int(rho)], [int(rho), 0]],
+                                    'S'   : [S1, S2],
+                                    "ij"  : [i, j],
+                                    'demand_sampler': make_negbinomial_demand_sampler(i, pin, j, pin),
+                                    'full_demand_matrix': negbinomial_demand_pmf(max_d[r], max_d[k], i, pin, j, pin),
+                                    'expected_demand_matrix': np.vstack((np.full(T, mu1, dtype=float), np.full(T, mu2, dtype=float)))
+                                }
+                                set_params.append(params)
     return set_params
 
 def generate_set4(poisson_lis, rhos, T, max_d):
     """
     Generate parameters for the fourth experimental set with two locations and Poisson demand.
+    This version creates all combinations of 'h' and 'p'.
+
     Args:
-        poisson_lis (list): List of Poisson rates.
+        poisson_lis (list): List of Poisson rates (lambda).
         rhos (list): List of distances between locations.
-        pin (float): Probability of success in the negative binomial distribution.
         T (int): Number of time periods.
         max_d (list): Maximum demand realizations for the Poisson distribution.
+
     Returns:
         list: List of parameter dictionaries for each configuration.
     """
     set_params = []
+    # Define h and p values outside the loop for clarity
+    h_values_1 = [8]
+    p_values_1 = [40]
+    h_values_2 = [12]
+    p_values_2 = [80]
+
     for k in range(len(poisson_lis)):
         for r in range(len(poisson_lis)):
 
             i = poisson_lis[k]
             j = poisson_lis[r]
 
-            #calcualte mu and sigma for Pisson distribution
-            mu1, sigma1 = i, np.sqrt(i)    
+            # Calculate mu and sigma for Poisson distribution
+            # For Poisson, mean (mu) = lambda and standard deviation (sigma) = sqrt(lambda)
+            mu1, sigma1 = i, np.sqrt(i)
             mu2, sigma2 = j, np.sqrt(j)
 
-            #inventory up to a level eq 16 paper :
-            # "Approximate dynamic programming for lateral transshipment problems in multi-location inventory systems. Joern Meissner and Olga V. Senicheva"
-            S1 = int(np.floor(mu1*T + sigma1*np.sqrt(T))) 
-            S2 = int(np.floor(mu2*T + sigma2*np.sqrt(T))) 
-
-
-            # Vertically stack the rows to form the 2x4 array
+            # Inventory up to a level
+            S1 = int(np.floor(mu1 * T + sigma1 * np.sqrt(T)))
+            S2 = int(np.floor(mu2 * T + sigma2 * np.sqrt(T)))
 
             for rho in rhos:
-                params = {
-                    'Distrbution':'Poission',
-                    'L'   : 2,
-                    'T'   : T,
-                    'h'   : [8, 12],
-                    'c'   : 1,
-                    'p'   : [40, 80],
-                    'mu'  : [mu1, mu2],
-                    'rho' : [[0, int(rho)], [int(rho), 0]],
-                    'S'   : [S1, S2],
-                    "ij": [i, j],
-                    'demand_sampler': make_poisson_demand_sampler(i, j),
-                    'full_demand_matrix': poisson_demand_pmf(max_d[r], max_d[k], i, j),
-                    'expected_demand_matrix': np.vstack((np.full(T, mu1, dtype=float), np.full(T, mu2, dtype=float)))
-                }
-                set_params.append(params)
+                # ---  Loop through each h and p value to create all combinations ---
+                for h_val in h_values_1:
+                    for h_val_1 in h_values_2:
+                        for p_val in p_values_1:
+                            for p_val_1 in p_values_2:
+                                params = {
+                                    'Distrbution': 'Poisson',
+                                    'L'   : 2,
+                                    'T'   : T,
+                                    'h'   : [h_val,h_val_1],  # Assign the individual h value
+                                    'c'   : 1,
+                                    'tc_u': [0, 2, 4, 8],
+                                    'tc_m': [0.5, 0.3, 0.2, 0.1],
+                                    'p'   : [p_val,p_val_1],  # Assign the individual p value
+                                    'mu'  : [mu1, mu2],
+                                    'rho' : [[0, int(rho)], [int(rho), 0]],
+                                    'S'   : [S1, S2],
+                                    "ij"  : [i, j],
+                                    'demand_sampler': make_poisson_demand_sampler(i, j),
+                                    'full_demand_matrix': poisson_demand_pmf(max_d[r], max_d[k], i, j),
+                                    'expected_demand_matrix': np.vstack((np.full(T, mu1, dtype=float), np.full(T, mu2, dtype=float)))
+                                }
+                                set_params.append(params)
     return set_params
-
 def generate_set5(uniform_lis, rhos, T):
     """
-    Generate parameters for the fourth experimental set with two locations and unifrom demand.
+    Generate parameters for the experimental set with all combinations of h and p.
+    
     Args:
         uniform_lis (list): List of uniform values [0,b].
         rhos (list): List of distances between locations.
-        pin (float): Probability of success in the negative binomial distribution.
         T (int): Number of time periods.
+        
     Returns:
         list: List of parameter dictionaries for each configuration.
     """
     set_params = []
+    # Define h and p values outside the loop for clarity
+    h_values_1 = [8]
+    p_values_1 = [40]
+    h_values_2 = [12]
+    p_values_2 = [80]
     for k in range(len(uniform_lis)):
         for r in range(len(uniform_lis)):
-
             i = uniform_lis[k]
             j = uniform_lis[r]
             
-            #calcualte mu and sigma for uniform distribution
+            # The standard deviation of a uniform distribution U(0, b) is b / sqrt(12)
             mu1, sigma1 = i/2, np.sqrt((i-0)/np.sqrt(12))    
             mu2, sigma2 = j/2, np.sqrt((j-0)/np.sqrt(12))
            
@@ -352,29 +389,35 @@ def generate_set5(uniform_lis, rhos, T):
             # "Approximate dynamic programming for lateral transshipment problems in multi-location inventory systems. Joern Meissner and Olga V. Senicheva"
 
             S1 = int(np.floor(mu1*T + sigma1*np.sqrt(T)))  
-            S2 = int(np.floor(mu2*T + sigma2*np.sqrt(T)))         
-
-
-            # Vertically stack the rows to form the 2x4 array
+            S2 = int(np.floor(mu2*T + sigma2*np.sqrt(T)))    
 
             for rho in rhos:
-                params = {
-                    'Distrbution':'Uniform',
-                    'L'   : 2,
-                    'T'   : T,
-                    'h'   : [8, 12],
-                    'c'   : 1,
-                    'p'   : [40, 80],
-                    'mu'  : [mu1, mu2],
-                    'rho' : [[0, int(rho)], [int(rho), 0]],
-                    'S'   : [S1, S2],
-                    "ij": [i, j],
-                    'demand_sampler': uniform_demand_sampler(i, j),
-                    'full_demand_matrix': uniform_demand_pmf(i, j),
-                    'expected_demand_matrix': np.vstack((np.full(T, mu1, dtype=float), np.full(T, mu2, dtype=float)))
-                }
-                set_params.append(params)
+                #  Loop through each h and p value to create all combinations ---
+                for h_val in h_values_1:
+                    for h_val_1 in h_values_2:
+                        for p_val in p_values_1:
+
+                            for p_val_1 in p_values_2:
+                                params = {
+                                'Distrbution': 'Uniform',
+                                'L'   : 2,
+                                'T'   : T,
+                                'h'   : [h_val,h_val_1],  # Assign the individual h value
+                                'c'   : 1,
+                                'tc_u': [0, 2, 4, 8],
+                                'tc_m': [0.5, 0.3, 0.2, 0.1],
+                                'p'   : [p_val,p_val_1],  # Assign the individual p value
+                                'mu'  : [mu1, mu2],
+                                'rho' : [[0, int(rho)], [int(rho), 0]],
+                                'S'   : [S1, S2],
+                                "ij"  : [i, j],
+                                'demand_sampler': uniform_demand_sampler(i, j),
+                                'full_demand_matrix': uniform_demand_pmf(i, j),
+                                'expected_demand_matrix': np.vstack((np.full(T, mu1, dtype=float), np.full(T, mu2, dtype=float)))
+                                }
+                                set_params.append(params)
     return set_params
+
 
 def generate_parameters():
     """
@@ -409,20 +452,23 @@ def generate_parameters():
     T = 4
 
     ri = [2, 4, 6] # Realizations of the negative binomial distribution
-    max_d = [12, 14, 16] # Maximum demand realizations for the negative binomial distribution
+    max_NB = [12, 14, 16] # Maximum demand realizations for the negative binomial distribution
+    #max_NB = [30, 40, 50]
     # Generate parameters for the two locations with negative binomial demand
 
-    set_params = generate_set3(ri, rhos, pin, T, max_d)
+    set_params = generate_set3(ri, rhos, pin, T, max_NB)
     params_list.append(set_params)
     
     # Experiment Set 4: 2 Location, poisson demand
 
     poisson_lis = [0.5, 1, 1.5] # Poisson rates
-    max_d = [8, 9, 10] # Poisson maximum demand realizations
+    max_P = [8, 9, 10] # Poisson maximum demand realizations
+    #max_P = [30, 40, 50] # Poisson maximum demand realizations
+
     unif_lis=[1,2,3] #unifrom [0,b_i]
     
     # Generate parameters for the two locations with poisson demand
-    set_params = generate_set4(poisson_lis, rhos, T, max_d)  
+    set_params = generate_set4(poisson_lis, rhos, T, max_P)  
     params_list.append(set_params)
     
     # Generate parameters for the two locations with uniform demand

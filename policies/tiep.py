@@ -38,7 +38,7 @@ class TIEPolicy(Policy):
         inv = np.array(x.copy())
 
         # Determine units sold (fulfilled demand) = min(inventory, demand)
-        sold = np.minimum(inv, d)
+        sold = np.minimum(inv, inv)
         # Update inventory after sales
         inv -= sold
 

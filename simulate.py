@@ -15,8 +15,13 @@ from policies.lpp import LPPolicy
 from policies.dp import DPPolicy
 from policies.dp_gen import DPGenPolicy
 from policies.rcp import RCPolicy
+from policies.dp_gen_cc import DPGenPolicy_C    
+from policies.fadp_cc import ForwardADP_C
+from policies.tiep_cc import TIEPolicy_C
+from policies.lap_cc import LAPolicy_C
+from policies.lpp_cc import LPPolicyMILP
 
-def simulate_policy_multi_location(policy_fn, params, N=1000):
+def simulate_policy_multi_location(policy_fn, params,id, N=1000,CC=False):
     """
     Simulates inventory management policy across multiple locations and periods
     
@@ -50,32 +55,44 @@ def simulate_policy_multi_location(policy_fn, params, N=1000):
         total_profit = 0
         total_profit_opt = 0
         di = params['demand_sampler']
-        OPT_solution=LPPolicy(params)
+        if id ==0:
+            if CC:
+                OPT_solution=LPPolicyMILP(params)
+            else:
+                OPT_solution=LPPolicy(params)
+
+
         z_opt=OPT_solution(x, None, di)
 
         x = params['S'].copy()
-        x_opt = params['S'].copy()
+        if id ==0 :
+            x_opt = params['S'].copy()
         for t in range(T):
             # Get transshipment decision from policy
             d = di(t) 
             z = policy_fn(x, t, d)
             
-            profit, y = policy_fn.get_sim_results(params, x, z, d)            
+            profit, y = policy_fn.get_sim_results(params, x, z, d,CC)            
             total_profit += profit
-            profit_opt, y_opt = OPT_solution.get_sim_results(params, x_opt, z_opt[t], d)
-            total_profit_opt += profit_opt
+            if id ==0:
+                profit_opt, y_opt = OPT_solution.get_sim_results(params, x_opt, z_opt[t], d,CC)
+                total_profit_opt += profit_opt
+                x_opt = [max(y_opt[i] - d[i], 0) for i in range(L)]
 
             # Update inventory for next period
             x = [max(y[i] - d[i], 0) for i in range(L)]
-            x_opt = [max(y_opt[i] - d[i], 0) for i in range(L)]
 
+        if id ==0 :
+            profits_opt[n] = total_profit_opt
         profits[n] = total_profit
-        profits_opt[n] = total_profit_opt
-        
-    return profits_opt.mean(),profits.mean()
+    if id ==0 :
+        return profits_opt.mean(),profits.mean()
+    else:
+        return profits.mean()
 
 
-def simulate_policy_2_location(policy_fn, params,testcase_id, N=1000):
+
+def simulate_policy_2_location(policy_fn, params,testcase_id,id, N=1000,CC=False):
 
     def sample_demand(bi1,bi2):
 
@@ -125,7 +142,11 @@ def simulate_policy_2_location(policy_fn, params,testcase_id, N=1000):
 
     profits = np.zeros(N)
     profits_opt = np.zeros(N)
-    OPT_solution = DPPolicy(params)
+    if id==0:
+        if CC:
+            OPT_solution = DPGenPolicy_C(params)
+        else: 
+            OPT_solution = DPPolicy(params)
     L = params['L']
     T = params['T']
     for n in range(N):
@@ -144,20 +165,25 @@ def simulate_policy_2_location(policy_fn, params,testcase_id, N=1000):
                 d = sample_demand(hi1, hi2) 
             
             z = policy_fn(x, t, d)         # call policy with state and time
-            profit, y = policy_fn.get_sim_results(params, x, z, d)        
+            profit, y = policy_fn.get_sim_results(params, x, z, d,CC)        
             total_profit += profit
-            z_opt = OPT_solution(x, t, d)
-            profit_opt, y_opt = OPT_solution.get_sim_results(params, x_opt, z_opt, d)
-            total_profit_opt += profit_opt
+            if id ==0 :
+                z_opt = OPT_solution(x, t, d)
+                profit_opt, y_opt = OPT_solution.get_sim_results(params, x_opt, z_opt, d, CC)
+                total_profit_opt += profit_opt
+                x_opt = [max(y_opt[i] - d[i], 0) for i in range(L)]
+            
             x = [max(y[i] - d[i], 0) for i in range(L)]
-            x_opt = [max(y_opt[i] - d[i], 0) for i in range(L)]
             #print(f"{x} {x_opt} -- {y} {y_opt} -- {z} {z_opt} -- {profit} {profit_opt}") 
         profits[n] = total_profit
-        profits_opt[n] = total_profit_opt
-        
-    return profits_opt.mean(),profits.mean()
+        if id ==0 :
+            profits_opt[n] = total_profit_opt
+    if id ==0 :        
+        return profits_opt.mean(),profits.mean()
+    else: 
+        return profits.mean()
 
-def simulate_policy(policy, params, testcase_id,N=1000):
+def simulate_policy(policy, params, testcase_id,id,N=1000,CC=False):
     """
     Simulates the given policy over N iterations and returns the average profit.
     
@@ -171,10 +197,10 @@ def simulate_policy(policy, params, testcase_id,N=1000):
     """
     if params['L'] == 2:
         print("Simulating for 2 locations")
-        return simulate_policy_2_location(policy, params,testcase_id, N)
+        return simulate_policy_2_location(policy, params,testcase_id,id, N,CC)
     else:
         print("Simulating for multiple locations")
-        return simulate_policy_multi_location(policy, params, N)
+        return simulate_policy_multi_location(policy, params, id, N, CC)
 
 
 def dict_until_key(d, stop_key):
@@ -192,6 +218,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Simulate inventory management policies.")
     parser.add_argument('--testcase_id', type=int, default=2, help='Test case ID to run (0-4), mulitlocation 0 and 1, two location: 2,3,and 4')
     parser.add_argument('--N', type=int, default=1000, help='Number of simulation iterations (default: 1000)')
+    parser.add_argument('--ncost', action='store_true', help='Use non linear cost')
     parser.add_argument('--force', action='store_true', help='Force re-run of all simulations even if results exist')
     args = parser.parse_args()
     testcase_id = args.testcase_id
@@ -209,20 +236,34 @@ if __name__ == "__main__":
         'TIE' : TIEPolicy, # Transshipment with Inventory Equalization policy
         "LA": LAPolicy, # Lookahead policy
         "ADP" : ForwardADP, # Adaptive Dynamic Programming policy
+        "ADPC" : ForwardADP_C, # Adaptive Dynamic Programming policy
         "LP": LPPolicy, # Linear Programming policy, used as gold standard for multiple locations
         'DP'  : DPPolicy, # Dynamic Programming policy, used as gold standard for 2 locations
-        'DPGen' : DPGenPolicy # Generalized Dynamic Programming policy
-    }
+        'DPGen' : DPGenPolicy,  # Generalized Dynamic Programming policy
+        'DPGenC' : DPGenPolicy_C, # Generalized Dynamic Programming policy
+        'TIEC' : TIEPolicy_C, # Transshipment with Inventory Equalization policy
+        "LAC": LAPolicy_C, # Lookahead policy
+        "LPC": LPPolicyMILP # Lookahead policy
 
+    }
+    if args.ncost:
     # Dictionary of policies to run for each test case
-    id2policies = {
-        0: ['ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 1, Multiple locations, Varying locations (L) and transshipment costs.
-        1: ['ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 2, Multiple locations, Varying locations (L) and initial inventory.
-        2: ['DPGen','ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 3, 2 locations, and negative binomial demands.
-        3: ['DPGen','ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 4, 2 locations, and Poisson demands.
-        4: ['DPGen','ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 5, 2 locations, and uniform demands.
+        id2policies = {
+            0: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 1, Multiple locations, Varying locations (L) and transshipment costs.
+            1: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 2, Multiple locations, Varying locations (L) and initial inventory.
+            2: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 3, 2 locations, and negative binomial demands.
+            3: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 4, 2 locations, and Poisson demands.
+            4: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 5, 2 locations, and uniform demands.
 
-    }
+        }
+    else :
+        id2policies = {
+            0: ['ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 1, Multiple locations, Varying locations (L) and transshipment costs.
+            1: ['ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 2, Multiple locations, Varying locations (L) and initial inventory.
+            2: ['ADP','TIE', 'LA', 'NT', 'RCP'], # Test case 3, 2 locations, and negative binomial demands.
+            3: ['ADP','TIE', 'LA', 'NT', 'RCP'], # Test case 4, 2 locations, and Poisson demands.
+            4: ['ADP','TIE', 'LA', 'NT', 'RCP'], # Test case 5, 2 locations, and uniform demands.
+        }        
     
     # Set up scenario parameters
     set_params = generate_parameters()
@@ -233,7 +274,7 @@ if __name__ == "__main__":
     
     # Create results directory and initialize policy collector
     policy_collector = {}
-    results = "results"
+    results = "results_check_new_implimentation_03_09"
     os.makedirs(results, exist_ok=True)
     for i in range(len(params)):
         # Create a unique result file for each test case and paramerter set
@@ -268,13 +309,19 @@ if __name__ == "__main__":
 
     
         # Simulate & report
+        id=0
         for name in policies:
             st = time.time()
             policy = policy_collector[name]
-            avg = simulate_policy(policy, params[i],testcase_id,N=args.N)
-            msg = f"Set {i}/{len(params)}, {args.N} iterations. Average profit <OPT>: {avg[0]:.2f}, average profit <{name}>: {avg[1]:.2f}. Ratio: {avg[1]/avg[0]}. Elapsed time {time.time() - st} sec."
+            avg = simulate_policy(policy, params[i],testcase_id,id,N=args.N,CC=args.ncost)
+            if id ==0 :
+                msg = f"Set {i}/{len(params)}, {args.N} iterations. Average profit <OPT>: {avg[0]:.2f}, average profit <{name}>: {avg[1]:.2f}. Ratio: {avg[1]/avg[0]}. Elapsed time {time.time() - st} sec."
+                OPT_value=avg[0]
+            else:
+                msg = f"Set {i}/{len(params)}, {args.N} iterations. Average profit <OPT>: {OPT_value:.2f}, average profit <{name}>: {avg:.2f}. Ratio: {avg/OPT_value}. Elapsed time {time.time() - st} sec."
             msg_final += msg + "\n"
             print(msg)
+            id=+1
 
         with open(res_path, "w") as f:
             f.write(msg_final)
