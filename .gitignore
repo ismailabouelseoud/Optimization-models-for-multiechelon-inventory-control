@@ -11,7 +11,20 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+results_08_25_0p5_0p3_0p2_0p1/
+results_24_08/
+results_25_08/
+results_check/
+results_check_new_implimentation_03_09/
+results_cost_structure_1/
+results_cost_stucture/
+results_new/
+results_o2/
+results_old1/
+results_orig/
+results_with_small_set/
 develop-eggs/
+results_cost_branch/
 dist/
 downloads/
 eggs/
@@ -174,3 +187,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+check1
+check2
+draft_code/
