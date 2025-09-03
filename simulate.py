@@ -274,7 +274,7 @@ if __name__ == "__main__":
     
     # Create results directory and initialize policy collector
     policy_collector = {}
-    results = "results_check_new_implimentation_03_09"
+    results = "results"
     os.makedirs(results, exist_ok=True)
     for i in range(len(params)):
         # Create a unique result file for each test case and paramerter set
