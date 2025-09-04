@@ -50,7 +50,7 @@ python3 collect_data.py --testcase_id {0,1,2,3,4}
 
 **Note:** If the simulation was run with the non-linear cost function, you must also include the `--ncost` flag here.
 The code create an csv file with the summery in the result file and create a boxplot figure for the testcase
-![Results summery example](results/profit_difference_boxplot_testcase_2_Dist_Uniform.png)
+![Results summery example](results/profit_difference_boxplot_testcase_4_Dist_Uniform.png)
 -----
 
 ## Implemented Policies
