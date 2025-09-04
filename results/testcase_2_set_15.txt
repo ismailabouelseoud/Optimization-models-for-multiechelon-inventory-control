@@ -1,20 +1,20 @@
 Iter 15/18. Initiating ADP policy start.
-Set 15/18. Initiating ADP policy end. Elaplsed time 107.83298802375793 sec.
+Set 15/18. Initiating ADP policy end. Elaplsed time 111.68631601333618 sec.
 Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [8, 6], 'ij': [6, 4]} 
 Iter 15/18. Initiating TIE policy start.
-Set 15/18. Initiating TIE policy end. Elaplsed time 3.600120544433594e-05 sec.
+Set 15/18. Initiating TIE policy end. Elaplsed time 3.719329833984375e-05 sec.
 Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [8, 6], 'ij': [6, 4]} 
 Iter 15/18. Initiating LA policy start.
-Set 15/18. Initiating LA policy end. Elaplsed time 7.987022399902344e-05 sec.
+Set 15/18. Initiating LA policy end. Elaplsed time 0.0009388923645019531 sec.
 Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [8, 6], 'ij': [6, 4]} 
 Iter 15/18. Initiating NT policy start.
-Set 15/18. Initiating NT policy end. Elaplsed time 2.9802322387695312e-05 sec.
+Set 15/18. Initiating NT policy end. Elaplsed time 0.0005068778991699219 sec.
 Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [8, 6], 'ij': [6, 4]} 
 Iter 15/18. Initiating RCP policy start.
-Set 15/18. Initiating RCP policy end. Elaplsed time 2.5987625122070312e-05 sec.
+Set 15/18. Initiating RCP policy end. Elaplsed time 8.416175842285156e-05 sec.
 Finished Running Set 15 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.4999999999999996, 0.9999999999999998], 'rho': [[0, 61], [61, 0]], 'S': [8, 6], 'ij': [6, 4]} 
-Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <ADP>: 194.59. Ratio: 0.9791187614154964. Elapsed time 123.62771987915039 sec.
-Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <TIE>: 198.44. Ratio: 0.9984955444971646. Elapsed time 0.42148780822753906 sec.
-Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <LA>: 194.98. Ratio: 0.9810760630563089. Elapsed time 0.6408147811889648 sec.
-Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <NT>: 198.44. Ratio: 0.9984955444971646. Elapsed time 0.12728333473205566 sec.
-Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <RCP>: 193.10. Ratio: 0.9716065471488304. Elapsed time 0.08322405815124512 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <ADP>: 194.59. Ratio: 0.9791187614154964. Elapsed time 193.20133686065674 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <TIE>: 181.82. Ratio: 0.9148347363177571. Elapsed time 0.48674988746643066 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <LA>: 194.98. Ratio: 0.9810760630563089. Elapsed time 1.3514149188995361 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <NT>: 198.44. Ratio: 0.9984955444971646. Elapsed time 0.17339205741882324 sec.
+Set 15/18, 1000 iterations. Average profit <OPT>: 198.74, average profit <RCP>: 193.10. Ratio: 0.9716065471488304. Elapsed time 0.17231392860412598 sec.

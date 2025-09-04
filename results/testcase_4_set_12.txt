@@ -1,20 +1,20 @@
 Iter 12/18. Initiating ADP policy start.
-Set 12/18. Initiating ADP policy end. Elaplsed time 75.12021684646606 sec.
+Set 12/18. Initiating ADP policy end. Elaplsed time 76.75941705703735 sec.
 Finished Running Set 12 from test id 4 with params: {'Distrbution': 'Uniform', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.5, 0.5], 'rho': [[0, 29], [29, 0]], 'S': [7, 3], 'ij': [3, 1]} 
 Iter 12/18. Initiating TIE policy start.
-Set 12/18. Initiating TIE policy end. Elaplsed time 3.0994415283203125e-05 sec.
+Set 12/18. Initiating TIE policy end. Elaplsed time 4.8160552978515625e-05 sec.
 Finished Running Set 12 from test id 4 with params: {'Distrbution': 'Uniform', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.5, 0.5], 'rho': [[0, 29], [29, 0]], 'S': [7, 3], 'ij': [3, 1]} 
 Iter 12/18. Initiating LA policy start.
-Set 12/18. Initiating LA policy end. Elaplsed time 5.817413330078125e-05 sec.
+Set 12/18. Initiating LA policy end. Elaplsed time 0.00010800361633300781 sec.
 Finished Running Set 12 from test id 4 with params: {'Distrbution': 'Uniform', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.5, 0.5], 'rho': [[0, 29], [29, 0]], 'S': [7, 3], 'ij': [3, 1]} 
 Iter 12/18. Initiating NT policy start.
-Set 12/18. Initiating NT policy end. Elaplsed time 1.1920928955078125e-05 sec.
+Set 12/18. Initiating NT policy end. Elaplsed time 2.5033950805664062e-05 sec.
 Finished Running Set 12 from test id 4 with params: {'Distrbution': 'Uniform', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.5, 0.5], 'rho': [[0, 29], [29, 0]], 'S': [7, 3], 'ij': [3, 1]} 
 Iter 12/18. Initiating RCP policy start.
-Set 12/18. Initiating RCP policy end. Elaplsed time 9.775161743164062e-06 sec.
+Set 12/18. Initiating RCP policy end. Elaplsed time 2.3126602172851562e-05 sec.
 Finished Running Set 12 from test id 4 with params: {'Distrbution': 'Uniform', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [1.5, 0.5], 'rho': [[0, 29], [29, 0]], 'S': [7, 3], 'ij': [3, 1]} 
-Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <ADP>: 191.94. Ratio: 0.9985744684171917. Elapsed time 73.86013698577881 sec.
-Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <TIE>: 190.84. Ratio: 0.9928983554360097. Elapsed time 0.39521002769470215 sec.
-Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <LA>: 188.72. Ratio: 0.9818530870042506. Elapsed time 0.6735448837280273 sec.
-Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <NT>: 190.84. Ratio: 0.9928983554360097. Elapsed time 0.1161189079284668 sec.
-Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <RCP>: 189.75. Ratio: 0.9871910264347664. Elapsed time 0.08400607109069824 sec.
+Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <ADP>: 191.94. Ratio: 0.9985744684171917. Elapsed time 69.45208501815796 sec.
+Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <TIE>: 190.32. Ratio: 0.9901981697006903. Elapsed time 0.29815101623535156 sec.
+Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <LA>: 188.72. Ratio: 0.9818530870042506. Elapsed time 0.6249301433563232 sec.
+Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <NT>: 190.84. Ratio: 0.9928983554360097. Elapsed time 0.07321810722351074 sec.
+Set 12/18, 1000 iterations. Average profit <OPT>: 192.21, average profit <RCP>: 189.75. Ratio: 0.9871910264347664. Elapsed time 0.0969991683959961 sec.

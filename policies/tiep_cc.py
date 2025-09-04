@@ -102,7 +102,7 @@ class TIEPolicy_C(Policy):
         current marginal cost, which is necessary for concave cost functions.
         """
         inv = np.array(x, dtype=float)
-        sold = np.minimum(inv, inv)
+        sold = np.minimum(inv, d)
         inv -= sold
 
         z = np.zeros((self.L, self.L), dtype=int)
