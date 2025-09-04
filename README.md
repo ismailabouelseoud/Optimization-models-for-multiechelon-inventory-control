@@ -74,7 +74,7 @@ All policies are located in the `policies/` directory. Policies extended to use 
 
   * **`set_parameters.py`**: Generates the parameter sets for the five test cases.
   * **`simulate.py`**: The main script used to run simulations.
-
+  * **`collect_data.py`**: The script for postprocessing the results and creating a summery.
 -----
 
 ## Output Example
