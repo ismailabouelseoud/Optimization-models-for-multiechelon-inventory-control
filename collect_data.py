@@ -25,7 +25,6 @@ def parse_log_files(log_directory,test_id):
     files = [f for f in os.listdir(log_directory) if f.startswith(test_case_name) and f.endswith(".txt")]
     
     for filename in sorted(files, key=lambda x: int(x.split('_')[-1].split('.')[0])):
-        print(filename)
         filepath = os.path.join(log_directory, filename)
         with open(filepath, 'r') as f:
             content = f.read()
@@ -43,16 +42,19 @@ def parse_log_files(log_directory,test_id):
             rho_val = max(params_dict['rho'][0] + params_dict['rho'][1])
             # Extract ij values for distribution parameters
             ij_val = params_dict.get('ij', [None, None])
+            dist_val=params_dict.get('Distrbution', None)
         except (ValueError, SyntaxError):
             print(f"Warning: Could not parse parameters dict in {filename}")
             rho_val = -1
             ij_val = [None, None]
+            dist_val=None
 
         # Extract profit for each policy
         matches = profit_pattern.findall(content)
         
         file_results = {
             'Set': int(filename.split('_')[-1].split('.')[0]), 
+            'Distribution':dist_val,
             'rho': rho_val,
             'distribt i=1': ij_val[0],
             'distribt j=1': ij_val[1]
@@ -86,7 +88,6 @@ def main():
     if results_df.empty:
         print("No data was parsed. Exiting.")
         return
-
     # --- Step 3: Create the summary table ---
     # Mapping from log names to desired table/plot names
     if args.ncost :
@@ -108,6 +109,7 @@ def main():
 
     # Select columns for the summary table, including new distribution columns
     summary_cols = {
+        'Distribution': results_df['Distribution'],
         'rho': results_df['rho'],
         'distribt i=1': results_df['distribt i=1'],
         'distribt j=1': results_df['distribt j=1']
@@ -119,10 +121,19 @@ def main():
         summary_cols[display_name] = results_df[f"{log_name}_Profit"]
         
     summary_df = pd.DataFrame(summary_cols)
-    
+
+    distribution = summary_df['Distribution'].iloc[0]
     # Display the final summary table, grouped by rho and distribution params
     print("\n--- Summary Table of Average Profits ---\n")
-    print(summary_df.groupby(['rho', 'distribt i=1', 'distribt j=1']).mean().round(2))
+    summary_table = summary_df.groupby(['Distribution','rho', 'distribt i=1', 'distribt j=1']).mean().round(2)
+
+    # Print to console (optional)
+    print(summary_table)
+
+    # Save to CSV file
+    table_file='results/summary_testcase_'+str(testcase_id)+'_Dist_'+distribution+'_profits.csv'
+    summary_table.to_csv(table_file)
+
 
     # --- Step 4: Prepare data for the box plot (this part is unchanged) ---
     # Calculate the profit difference: OPT - Policy Profit
@@ -142,10 +153,13 @@ def main():
     sns.boxplot(x='Policy', y='Profit Difference', data=plot_df, ax=ax, 
                 showmeans=True, meanprops={"marker":"x", "markerfacecolor":"black", "markeredgecolor":"black"})
     
-    ax.set_title('Average Profit Difference from Optimal Solution', fontsize=16)
+    ax.set_title(f'Average Profit Difference from Optimal Solution (Dist: {distribution})', fontsize=16)    
     ax.set_xlabel('Policies', fontsize=12)
     ax.set_ylabel('Average profit difference from optimal solution', fontsize=12)
     ax.grid(axis='y', linestyle='--', alpha=0.7)
+    plt_file='results/profit_difference_boxplot_testcase_'+str(testcase_id)+'_Dist_'+distribution+'.png'
+
+    plt.savefig(plt_file, dpi=300, bbox_inches='tight')
     
     print("\nDisplaying box plot... Close the plot window to exit.")
     plt.show()

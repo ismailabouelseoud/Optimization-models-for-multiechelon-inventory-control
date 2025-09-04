@@ -254,8 +254,8 @@ if __name__ == "__main__":
             2: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 3, 2 locations, and negative binomial demands.
             3: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 4, 2 locations, and Poisson demands.
             4: ['ADPC','TIEC', 'LAC', 'NT', 'RCP'], # Test case 5, 2 locations, and uniform demands.
-
         }
+        identifier_cc='cc' #identifier for concave cost 
     else :
         id2policies = {
             0: ['ADP', 'TIE', 'LA', 'NT', 'RCP'], # Test case 1, Multiple locations, Varying locations (L) and transshipment costs.
@@ -284,8 +284,11 @@ if __name__ == "__main__":
             print(f"Removing existing result file: {res_path}")
             os.remove(res_path) 
         
+        flag='run' # an identifier to check if the optimization have ran or the results already avaliabile
         if os.path.exists(res_path):
             print(f"Skipping iteration {i} for test case {testcase_id}, result file already exists: {res_path}")
+            print('To rerun all please use the "--force" option when running the simulate.py code')
+            flag='skip'
             continue
 
         msg_final = ""
@@ -325,4 +328,5 @@ if __name__ == "__main__":
 
         with open(res_path, "w") as f:
             f.write(msg_final)
-    print(f"Finished Running test id: {testcase_id} (Total {len(set_params)} ids). Results saved in {results} directory." )
+    if flag!='skip':
+        print(f"Finished Running test id: {testcase_id} (Total {len(set_params)} ids). Results saved in {results} directory." )

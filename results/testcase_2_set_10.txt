@@ -1,24 +1,20 @@
-Iter 10/18. Initiating DPGen policy start.
-Set 10/18. Initiating DPGen policy end. Elaplsed time 5.172511100769043 sec.
-Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 9], 'ij': [4, 6]} 
 Iter 10/18. Initiating ADP policy start.
-Set 10/18. Initiating ADP policy end. Elaplsed time 65.70983910560608 sec.
-Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 9], 'ij': [4, 6]} 
+Set 10/18. Initiating ADP policy end. Elaplsed time 100.20933699607849 sec.
+Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 8], 'ij': [4, 6]} 
 Iter 10/18. Initiating TIE policy start.
-Set 10/18. Initiating TIE policy end. Elaplsed time 2.9325485229492188e-05 sec.
-Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 9], 'ij': [4, 6]} 
+Set 10/18. Initiating TIE policy end. Elaplsed time 3.814697265625e-05 sec.
+Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 8], 'ij': [4, 6]} 
 Iter 10/18. Initiating LA policy start.
-Set 10/18. Initiating LA policy end. Elaplsed time 4.982948303222656e-05 sec.
-Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 9], 'ij': [4, 6]} 
+Set 10/18. Initiating LA policy end. Elaplsed time 0.00019979476928710938 sec.
+Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 8], 'ij': [4, 6]} 
 Iter 10/18. Initiating NT policy start.
-Set 10/18. Initiating NT policy end. Elaplsed time 1.4781951904296875e-05 sec.
-Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 9], 'ij': [4, 6]} 
+Set 10/18. Initiating NT policy end. Elaplsed time 2.9087066650390625e-05 sec.
+Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 8], 'ij': [4, 6]} 
 Iter 10/18. Initiating RCP policy start.
-Set 10/18. Initiating RCP policy end. Elaplsed time 1.2874603271484375e-05 sec.
-Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 9], 'ij': [4, 6]} 
-Set 10/18, 1000 iterations. Average profit <OPT>: 245.41, average profit <DPGen>: 245.41. Ratio: 1.0. Elapsed time 48.252537965774536 sec.
-Set 10/18, 1000 iterations. Average profit <OPT>: 244.70, average profit <ADP>: 244.17. Ratio: 0.997858576116585. Elapsed time 148.80411291122437 sec.
-Set 10/18, 1000 iterations. Average profit <OPT>: 242.78, average profit <TIE>: 245.13. Ratio: 1.0097003398208217. Elapsed time 56.62055587768555 sec.
-Set 10/18, 1000 iterations. Average profit <OPT>: 242.36, average profit <LA>: 224.73. Ratio: 0.9272581736561536. Elapsed time 50.238924980163574 sec.
-Set 10/18, 1000 iterations. Average profit <OPT>: 244.22, average profit <NT>: 242.22. Ratio: 0.9917902227900139. Elapsed time 45.322224855422974 sec.
-Set 10/18, 1000 iterations. Average profit <OPT>: 244.69, average profit <RCP>: 243.73. Ratio: 0.9960970386536213. Elapsed time 44.048744201660156 sec.
+Set 10/18. Initiating RCP policy end. Elaplsed time 2.1219253540039062e-05 sec.
+Finished Running Set 10 from test id 2 with params: {'Distrbution': 'NegBin', 'L': 2, 'T': 4, 'h': [8, 12], 'c': 1, 'tc_u': [0, 2, 4, 8], 'tc_m': [0.5, 0.3, 0.2, 0.1], 'p': [40, 80], 'mu': [0.9999999999999998, 1.4999999999999996], 'rho': [[0, 29], [29, 0]], 'S': [6, 8], 'ij': [4, 6]} 
+Set 10/18, 1000 iterations. Average profit <OPT>: 278.45, average profit <ADP>: 277.74. Ratio: 0.9974645358233077. Elapsed time 178.45204782485962 sec.
+Set 10/18, 1000 iterations. Average profit <OPT>: 278.45, average profit <TIE>: 274.70. Ratio: 0.9865469563655953. Elapsed time 0.4169929027557373 sec.
+Set 10/18, 1000 iterations. Average profit <OPT>: 278.45, average profit <LA>: 278.02. Ratio: 0.9984593284252111. Elapsed time 0.6611878871917725 sec.
+Set 10/18, 1000 iterations. Average profit <OPT>: 278.45, average profit <NT>: 274.70. Ratio: 0.9865469563655953. Elapsed time 0.11529922485351562 sec.
+Set 10/18, 1000 iterations. Average profit <OPT>: 278.45, average profit <RCP>: 277.37. Ratio: 0.9961249775543185. Elapsed time 0.10005569458007812 sec.
