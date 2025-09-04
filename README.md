@@ -23,7 +23,7 @@ The codebase replicates the paper’s findings across five experimental setups: 
 To run a simulation, use the `simulate.py` script with a specified test case ID.
 
 ```bash
-python3 simulate.py --testcase_id {0,1,2,3,4}
+python3 simulate.py --testcase_id {0,1,2,3,4} --force
 ````
 
 ### Options
@@ -49,7 +49,8 @@ python3 collect_data.py --testcase_id {0,1,2,3,4}
 ```
 
 **Note:** If the simulation was run with the non-linear cost function, you must also include the `--ncost` flag here.
-
+The code create an csv file with the summery in the result file and create a boxplot figure for the testcase
+![Results summery example](results/profit_difference_boxplot_testcase_2_Dist_NegBin.png)
 -----
 
 ## Implemented Policies
