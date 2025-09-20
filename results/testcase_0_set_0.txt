@@ -1,0 +1,40 @@
+Iter 0/4. Initiating ADPC policy start.
+Set 0/4. Initiating ADPC policy end. Elaplsed time 3316.940550804138 sec.
+Finished Running Set 0 from test id 0 with params: {'Distrbution': 'Poission', 'L': 5, 'T': 28, 'h': [5, 5, 5, 5, 5], 'p': [80, 80, 80, 80, 80], 'mu': [24, 24, 24, 24, 24], 'c': 0.5, 'tc_u': [0, 5, 20, 30, 40], 'tc_m': [1, 0.5, 0.25, 0.2, 0.1], 'rho': array([[ 0.  , 50.17, 82.42, 32.76, 33.2 ],
+       [50.17,  0.  , 72.64, 72.51, 17.06],
+       [82.42, 72.64,  0.  , 71.69, 70.92],
+       [32.76, 72.51, 71.69,  0.  , 56.56],
+       [33.2 , 17.06, 70.92, 56.56,  0.  ]]), 'S': [697, 697, 697, 697, 697]} 
+Iter 0/4. Initiating TIEC policy start.
+Set 0/4. Initiating TIEC policy end. Elaplsed time 5.412101745605469e-05 sec.
+Finished Running Set 0 from test id 0 with params: {'Distrbution': 'Poission', 'L': 5, 'T': 28, 'h': [5, 5, 5, 5, 5], 'p': [80, 80, 80, 80, 80], 'mu': [24, 24, 24, 24, 24], 'c': 0.5, 'tc_u': [0, 5, 20, 30, 40], 'tc_m': [1, 0.5, 0.25, 0.2, 0.1], 'rho': array([[ 0.  , 50.17, 82.42, 32.76, 33.2 ],
+       [50.17,  0.  , 72.64, 72.51, 17.06],
+       [82.42, 72.64,  0.  , 71.69, 70.92],
+       [32.76, 72.51, 71.69,  0.  , 56.56],
+       [33.2 , 17.06, 70.92, 56.56,  0.  ]]), 'S': [697, 697, 697, 697, 697]} 
+Iter 0/4. Initiating LAC policy start.
+Set 0/4. Initiating LAC policy end. Elaplsed time 4.887580871582031e-05 sec.
+Finished Running Set 0 from test id 0 with params: {'Distrbution': 'Poission', 'L': 5, 'T': 28, 'h': [5, 5, 5, 5, 5], 'p': [80, 80, 80, 80, 80], 'mu': [24, 24, 24, 24, 24], 'c': 0.5, 'tc_u': [0, 5, 20, 30, 40], 'tc_m': [1, 0.5, 0.25, 0.2, 0.1], 'rho': array([[ 0.  , 50.17, 82.42, 32.76, 33.2 ],
+       [50.17,  0.  , 72.64, 72.51, 17.06],
+       [82.42, 72.64,  0.  , 71.69, 70.92],
+       [32.76, 72.51, 71.69,  0.  , 56.56],
+       [33.2 , 17.06, 70.92, 56.56,  0.  ]]), 'S': [697, 697, 697, 697, 697]} 
+Iter 0/4. Initiating NT policy start.
+Set 0/4. Initiating NT policy end. Elaplsed time 2.4080276489257812e-05 sec.
+Finished Running Set 0 from test id 0 with params: {'Distrbution': 'Poission', 'L': 5, 'T': 28, 'h': [5, 5, 5, 5, 5], 'p': [80, 80, 80, 80, 80], 'mu': [24, 24, 24, 24, 24], 'c': 0.5, 'tc_u': [0, 5, 20, 30, 40], 'tc_m': [1, 0.5, 0.25, 0.2, 0.1], 'rho': array([[ 0.  , 50.17, 82.42, 32.76, 33.2 ],
+       [50.17,  0.  , 72.64, 72.51, 17.06],
+       [82.42, 72.64,  0.  , 71.69, 70.92],
+       [32.76, 72.51, 71.69,  0.  , 56.56],
+       [33.2 , 17.06, 70.92, 56.56,  0.  ]]), 'S': [697, 697, 697, 697, 697]} 
+Iter 0/4. Initiating RCP policy start.
+Set 0/4. Initiating RCP policy end. Elaplsed time 2.193450927734375e-05 sec.
+Finished Running Set 0 from test id 0 with params: {'Distrbution': 'Poission', 'L': 5, 'T': 28, 'h': [5, 5, 5, 5, 5], 'p': [80, 80, 80, 80, 80], 'mu': [24, 24, 24, 24, 24], 'c': 0.5, 'tc_u': [0, 5, 20, 30, 40], 'tc_m': [1, 0.5, 0.25, 0.2, 0.1], 'rho': array([[ 0.  , 50.17, 82.42, 32.76, 33.2 ],
+       [50.17,  0.  , 72.64, 72.51, 17.06],
+       [82.42, 72.64,  0.  , 71.69, 70.92],
+       [32.76, 72.51, 71.69,  0.  , 56.56],
+       [33.2 , 17.06, 70.92, 56.56,  0.  ]]), 'S': [697, 697, 697, 697, 697]} 
+Set 0/4, 1000 iterations. Average profit <OPT>: 24772.64, average profit <ADPC>: 23260.00. Ratio: 0.9389390876386204. Elapsed time 4050.426197052002 sec.
+Set 0/4, 1000 iterations. Average profit <OPT>: 24772.64, average profit <TIEC>: 19587.49. Ratio: 0.7906904552764662. Elapsed time 10.242227792739868 sec.
+Set 0/4, 1000 iterations. Average profit <OPT>: 24772.64, average profit <LAC>: 24109.70. Ratio: 0.9732390249888587. Elapsed time 395.8287789821625 sec.
+Set 0/4, 1000 iterations. Average profit <OPT>: 24772.64, average profit <NT>: 23260.00. Ratio: 0.9389390876386204. Elapsed time 2.0862278938293457 sec.
+Set 0/4, 1000 iterations. Average profit <OPT>: 24772.64, average profit <RCP>: 23260.00. Ratio: 0.9389390876386204. Elapsed time 2.170225143432617 sec.
