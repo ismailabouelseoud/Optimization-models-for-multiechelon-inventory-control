@@ -60,9 +60,9 @@ def simulate_policy_multi_location(policy_fn, params,id, N=1000,CC=False):
                 OPT_solution=LPPolicyMILP(params)
             else:
                 OPT_solution=LPPolicy(params)
+            z_opt=OPT_solution(x, None, di)
 
 
-        z_opt=OPT_solution(x, None, di)
 
         x = params['S'].copy()
         if id ==0 :
