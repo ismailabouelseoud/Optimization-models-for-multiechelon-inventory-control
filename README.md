@@ -20,6 +20,17 @@ The codebase replicates the paper’s findings across five experimental setups: 
 
 ## Usage
 
+Requirements
+
+- **Python**: 3.10+ (developed on 3.13.5)
+- **Dependencies**: numpy, scipy, matplotlib (see requirements.txt)
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
 To run a simulation, use the `simulate.py` script with a specified test case ID.
 
 ```bash
