@@ -1,4 +1,6 @@
 ````markdown
+![Python Version](https://img.shields.io/badge/python-3.13.5-blue.svg)
+![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)
 # Approximate Dynamic Programming for Lateral Transshipments with a Concave Cost Function
 
 ### **Ismail Abouelseoud**
