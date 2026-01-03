@@ -1,4 +1,3 @@
-````markdown
 
 # Approximate Dynamic Programming for Lateral Transshipments with a Concave Cost Function
 
@@ -115,6 +114,3 @@ Elapsed time: 0.237 sec.
   * **`ij`**: Defines the parameter range for the Uniform demand distribution. In this case, demand is drawn from [0, i] and [0, j].
 
 In this example, the exact DP (`OPT`) and the generalized DP (`DPGen`) both achieve an average profit of **95.88**. The ratio of **1.0** confirms that the generalized DP implementation correctly replicates the optimal two-location solution while being extensible to larger, multi-location problems.
-
-```
-```
